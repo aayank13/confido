@@ -118,10 +118,6 @@ export default function Dashboard() {
     router.push('/');
   };
 
-  const startNewSession = (agentType: string) => {
-    router.push(`/dashboard/session?agent=${agentType}`);
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
@@ -236,34 +232,37 @@ export default function Dashboard() {
 
         {/* Quick Actions */}
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold">Start a New Session</h2>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-semibold mb-4">What would you like to do?</h2>
+            <p className="text-gray-400">Choose an action to continue</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            <button
+              onClick={() => router.push('/dashboard/session')}
+              className="p-8 rounded-xl border border-gray-700 hover:border-blue-500 hover:bg-blue-500/10 transition-all group text-center"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl mx-auto mb-4 flex items-center justify-center group-hover:scale-105 transition-transform">
+                <PlayCircle className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">Start Session</h3>
+              <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                Begin a coaching session with an AI coach
+              </p>
+            </button>
+
             <button
               onClick={() => router.push('/dashboard/create-agent')}
-              className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center space-x-2"
+              className="p-8 rounded-xl border border-gray-700 hover:border-purple-500 hover:bg-purple-500/10 transition-all group text-center"
             >
-              <Plus className="w-4 h-4" />
-              <span>Create Custom Agent</span>
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl mx-auto mb-4 flex items-center justify-center group-hover:scale-105 transition-transform">
+                <Plus className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-purple-400 transition-colors">Create Agent</h3>
+              <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                Design your own custom AI coaching assistant
+              </p>
             </button>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { key: 'interview', name: 'Interview Coach', color: 'from-blue-500 to-purple-600', description: 'Practice job interviews' },
-              { key: 'conversation', name: 'English Practice', color: 'from-green-500 to-blue-600', description: 'Improve conversation skills' },
-              { key: 'confidence', name: 'Confidence Booster', color: 'from-purple-500 to-pink-600', description: 'Build speaking confidence' },
-              { key: 'networking', name: 'Networking Coach', color: 'from-orange-500 to-red-600', description: 'Master professional conversations' }
-            ].map((agent) => (
-              <button
-                key={agent.key}
-                onClick={() => startNewSession(agent.key)}
-                className="text-left p-4 rounded-lg border border-gray-700 hover:border-gray-600 hover:bg-gray-800/50 transition-colors group"
-              >
-                <div className={`w-full h-2 rounded-full bg-gradient-to-r ${agent.color} mb-3`}></div>
-                <h3 className="font-semibold mb-1 group-hover:text-white transition-colors">{agent.name}</h3>
-                <p className="text-sm text-gray-400">{agent.description}</p>
-                <PlayCircle className="w-5 h-5 mt-2 text-gray-500 group-hover:text-white transition-colors" />
-              </button>
-            ))}
           </div>
         </div>
 
